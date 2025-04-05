@@ -61,7 +61,8 @@ def winR(action):
 
 def interceptar(mensagem):
   try:
-    winR(f"cmd /c PowerShell -Command Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('{mensagem}')")
+    #winR(f"cmd /c PowerShell -Command Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('{mensagem}')")
+    subprocess.run(f"PowerShell -Command Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('{mensagem}')")
   except TypeError: pass
 
 def runCMD(fecharPosExecucao, comandoCMD):
