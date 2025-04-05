@@ -11,7 +11,7 @@ def esperar(tempo):
     time.sleep(tempo)
   except TypeError: pass
 
-def click(numClicks, esquerdoOuDireito):
+def click(numClicks=1, esquerdoOuDireito=True):
   try:
     for x in range(0, numClicks):
       match esquerdoOuDireito:
@@ -23,7 +23,7 @@ def click(numClicks, esquerdoOuDireito):
           mouse.release(Button.right)
   except TypeError: pass
 
-def mover(x, y, duração):
+def mover(x, y, duração=0.1):
   try:
     pyautogui.moveTo(x, y, duration=duração)
   except TypeError: pass
@@ -59,13 +59,12 @@ def winR(action):
     botaoTeclado("enter")
   except TypeError: pass
 
-def interceptar(mensagem):
+def interceptar(mensagem, title=""):
   try:
-    #winR(f"cmd /c PowerShell -Command Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('{mensagem}')")
-    subprocess.run(f"PowerShell -Command Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('{mensagem}')")
+    subprocess.run(f"PowerShell -Command Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('{mensagem}', '{title}')")
   except TypeError: pass
 
-def runCMD(fecharPosExecucao, comandoCMD):
+def runCMD(comandoCMD, fecharPosExecucao=True):
   try:
     if fecharPosExecucao: # Fechar pós execução (True);
       winR(f"cmd /c {comandoCMD}")
