@@ -1,0 +1,40 @@
+Coleções, Documentos e informações de cada arquivo do DB.
+Host: MongoDB.
+
+# Database:
+Agrupa todas as coleções, que incluem seus respectivos documentos.
+Exemplo:
+
+Database (Pode ser o nome do alvo, para facilitar.)
+  Coleção1
+    Documentos
+
+  Coleção2
+    Documentos
+
+# Coleções: (Agrupam Documentos, podem ser interpretados como pastas)
+Configs (Cada alvo terá o seu para melhor identificação, o nome da coleção será usado pelo Client 3 (Controle) para ler e editar seus documentos internos.)
+
+Comandos (Os documentos dentro dessa coleção incluirão: Documento de Log de instalador e de Validador, caso implementemos ele, e um documento para a inserção de comandos para o Client 2, que os executará e limpará o documento, que ficará pronto para receber novas ações.)
+
+# Documentos: (No MongoDB, não é possível mudar o nome "Documents". De qualquer forma, isso não interfere em nada. Só usamos o nome da Database e da Coleção para encontrar Documentos.)
+
+Configs/Documents: (Em um documento, se pode ter várias informações, assim como em um arquivo JSON.)
+
+Doc1 - Exemplo:
+version: float ou int (Opcional, talvez desnecessário)
+delayFPS: float,
+delayRequestComandos: float
+
+Doc2 - Exemplo:
+instalação: "Concluída com sucesso em xx/xx/xxxx às xx:xx PM"
+
+Ainda é necessário decidir quais customizações poderão ser incluídas.
+
+Comandos/Documents: Será nessa coleção,
+
+Doc1 - Exemplo:
+comando: "escrever('Olá')"
+
+Doc2 - Exemplo: (Esse log pode ser implementado juntamente ao Doc1, ainda será decidido.)
+logComando: "Comando escrever('Olá') executado em xx/xx/xxxx às xx:xx PM"
