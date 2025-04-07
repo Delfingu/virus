@@ -1,0 +1,25 @@
+Planejamentos:
+
+# Clients e suas responsabilidades:
+
+1- Instalador (Uso único):
+Deve ser personalizado para cada origem de arquivo configurado para o alvo ou como preferir.
+Instalação do software principal.
+Instalação de software validador alternativo que verifica se o software principal foi removido. (Abre portas para inserir feature de atualização.)
+Configuração de Agendador de Tarefas para execução do validador ou soft principal sempre que o windows iniciar.
+
+2- Software Principal:
+Deve ser personalizado para cada alvo e DB respectivo.
+É instalado pelo Client 1.
+Se comunica com o DB procurando instruções e novas configurações a cada tick com delay configurável pelo próprio DB.
+Recebe comandos via DB, os executa e limpa o DB, preparando o canal para novas instruções.
+Envia prints da tela a xFPS, sendo x um valor configurável, mas não muito alto para não sobrecarregar a máquina nem o DB, caso usemos ele para upload das prints.
+Oferecerá alta customização, como delay para cada ação, delay de procura nos DB's, autodestruição, etc.
+
+3- Software Controle:
+Poderá ser um website em NextJS + MongoDB, um client Python, ainda será decidido. Será capaz de ser portável, se conectar com o DB do alvo que quiser, desde que a conexão dele esteja em seu DB e poderá enviar comandos, editar documentos de configuração do Client 2
+
+4- Validador (Opcional, provavelmente não faremos um):
+Será executado pelo Agendador de Tarefas do Windows e, após verificar sua versão, executará ou atualizará o Client 2.
+A versão do Client 2 ficará armazenada no documento de configuração de cada Client 2 em seu DB, podendo ser editado pelo Client 4 ao comparar a versão do Client 2 no github e então no DB.
+A atualização é simples, deleta o Client 2 e instala a nova versão no mesmo local com o mesmo nome.
