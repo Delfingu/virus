@@ -64,10 +64,19 @@ def interceptar(mensagem, title=""):
     subprocess.run(f"PowerShell -Command Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('{mensagem}', '{title}')")
   except TypeError: pass
 
-def runCMD(comandoCMD, fecharPosExecucao=True):
+def runCMD(comandosCMD):
   try:
-    if fecharPosExecucao: # Fechar pós execução (True);
-      winR(f"cmd /c {comandoCMD}")
-    else: # Manter aberto (False);
-      winR(f"cmd /k {comandoCMD}")
+    # Uso: runCMD("comando1 && comando2...")
+    subprocess.run(f"cmd /c {comandosCMD}")
+
+    """
+    # Junta múltiplos comandos de uma lista;
+    command_string = " && ".join(comandosCMD)
+        
+    # Roda os comandos silencioasamente. TODO: Testar o parâmetro comentado abaixo.
+    subprocess.run(f"cmd /c {command_string}", shell=True) # creationflags=subprocess.CREATE_NO_WINDOW
+    # Exemplo de comando: runCMD(["echo Olá", "echo Mundo!"])
+    """
   except TypeError: pass
+
+runCMD("echo Hello && echo world! && cd.. && dir")
