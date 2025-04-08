@@ -59,24 +59,19 @@ def winR(action):
     botaoTeclado("enter")
   except TypeError: pass
 
-def interceptar(mensagem, title=""):
+def interceptar(mensagem, title="", assincrono=True):
   try:
-    subprocess.run(f"PowerShell -Command Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('{mensagem}', '{title}')")
+    if assincrono:
+      subprocess.Popen(f"PowerShell -Command Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('{mensagem}', '{title}')")
+    else:
+      subprocess.run(f"PowerShell -Command Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('{mensagem}', '{title}')")
   except TypeError: pass
 
-def runCMD(comandosCMD):
+def runCMD(comandosCMD, assincrono=True):
+  # Uso: runCMD("comando1 && comando2...")
   try:
-    # Uso: runCMD("comando1 && comando2...")
-    subprocess.run(f"cmd /c {comandosCMD}")
-
-    """
-    # Junta múltiplos comandos de uma lista;
-    command_string = " && ".join(comandosCMD)
-        
-    # Roda os comandos silencioasamente. TODO: Testar o parâmetro comentado abaixo.
-    subprocess.run(f"cmd /c {command_string}", shell=True) # creationflags=subprocess.CREATE_NO_WINDOW
-    # Exemplo de comando: runCMD(["echo Olá", "echo Mundo!"])
-    """
+    if assincrono:
+      subprocess.Popen(f"cmd /c {comandosCMD}")
+    else:
+      subprocess.run(f"cmd /c {comandosCMD}")
   except TypeError: pass
-
-runCMD("echo Hello && echo world! && cd.. && dir")
